@@ -43,23 +43,18 @@ def download_month(year, month, area, output_fname):
         "download_format": "unarchived",
         "area": area,
     }
-    print(f"Downloading {output_fname}...")
     client.retrieve("reanalysis-era5-land", request).download(output_fname)
-    print(f"Saved to {output_fname}")
 
 def merge_monthly_files(year, outfname):
     files = [f"ERA5_{year}_{month:02d}.nc" for month in range(1, 13)]
-    print(f"Merging monthly files into {outfname}...")
     datasets = [xr.open_dataset(f) for f in files]
     combined = xr.concat(datasets, dim="time")
     combined.to_netcdf(outfname)
-    print(f"Saved combined file to {outfname}")
 
     # Clean up individual files
     for ds, fname in zip(datasets, files):
         ds.close()
         os.remove(fname)
-        print(f"Deleted {fname}")
 
 
 if __name__ == "__main__":
