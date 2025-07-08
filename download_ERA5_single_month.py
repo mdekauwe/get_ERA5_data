@@ -50,7 +50,7 @@ request = {
     ],
     "data_format": "netcdf",
     "download_format": "unarchived",
-    "area": [51.25, -0.9, 51.1, -0.8]
+    "area": [51.2, -0.9, 51.2, -0.9]
 }
 
 ofname = "/Users/xj21307/Desktop/era5_met_data_may_2016.nc"

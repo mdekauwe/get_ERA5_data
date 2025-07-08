@@ -61,5 +61,5 @@ if __name__ == "__main__":
 
     ofname = "/Users/xj21307/Desktop/era5_met_data.nc"
     year = 2016
-    area = [51.25, -0.9, 51.1, -0.8]
+    area = [51.2, -0.9, 51.2, -0.9]
     main(year, area, ofname)
