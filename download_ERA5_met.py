@@ -3,6 +3,8 @@
 """
 Download ERA5 met data
 
+https://cds.climate.copernicus.eu/datasets/reanalysis-era5-land?tab=download
+
 That's all folks.
 """
 __author__ = "Martin De Kauwe"
