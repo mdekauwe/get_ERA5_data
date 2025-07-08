@@ -14,11 +14,11 @@ import cdsapi
 import xarray as xr
 import sys
 
-def main(year, location, outfname):
+def main(year, area, outfname):
 
     for month in range(1, 13):
         monthly_fname = f"ERA5_{year}_{month:02d}.nc"
-        download_month(year, month, location, monthly_fname)
+        download_month(year, month, area, monthly_fname)
 
     merge_monthly_files(year, outfname)
 
@@ -61,5 +61,5 @@ if __name__ == "__main__":
 
     ofname = "/Users/xj21307/Desktop/era5_met_data.nc"
     year = 2016
-    location = [51.1, 0.85, 49.6, 0.9]  # N, W, S, E
-    main(year, location, ofname)
+    area = [51.25, -0.9, 51.1, -0.8]
+    main(year, area, ofname)
