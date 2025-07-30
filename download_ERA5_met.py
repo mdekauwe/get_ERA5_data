@@ -48,8 +48,12 @@ if __name__ == "__main__":
 
     area = [51.2, -0.9, 51.2, -0.9]
 
-    year = 2016
-    for month in range(1, 13):
-        print(year, month)
-        monthly_fname = os.path.join(odir, f"ERA5_{year}_{month:02d}.nc")
-        download_month(year, month, area, monthly_fname)
+    years = [2016]
+    for year in years:
+        for month in range(1, 13):
+            monthly_fname = os.path.join(odir, f"ERA5_{year}_{month:02d}.nc")
+            if os.path.exists(monthly_fname):
+                print(f"Skipping {monthly_fname}, already exists.")
+                continue
+            print(f"Downloading {year}-{month:02d}...")
+            download_month(year, month, area, monthly_fname)
