@@ -48,7 +48,9 @@ lon_dms <- decimal_to_dms(lon, "lon")
 
 tair <- ncvar_get(nc, "t2m") - 273.15
 dew <- ncvar_get(nc, "d2m")
-ppt <- ncvar_get(nc, "tp") * 1000.0
+ppt_cum <- ncvar_get(nc, "tp") * 1000.0  # cumulative precipitation in mm
+ppt <- diff(c(ppt_cum[1], ppt_cum))      # hourly incremental precipitation
+ppt[ppt < 0] <- 0                        # clip negatives to zero
 u10 <- ncvar_get(nc, "u10")
 v10 <- ncvar_get(nc, "v10")
 wind <- sqrt(u10^2 + v10^2)
