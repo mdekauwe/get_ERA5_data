@@ -8,21 +8,13 @@ https://cds.climate.copernicus.eu/datasets/reanalysis-era5-land?tab=download
 That's all folks.
 """
 __author__ = "Martin De Kauwe"
-__version__ = "1.0 (08.07.2025)"
+__version__ = "1.0 (30.07.2025)"
 __email__ = "mdekauwe@gmail.com"
 
 import os
 import cdsapi
 import xarray as xr
 import sys
-
-def main(year, area, outfname):
-
-    for month in range(1, 13):
-        monthly_fname = f"ERA5_{year}_{month:02d}.nc"
-        download_month(year, month, area, monthly_fname)
-
-    merge_monthly_files(year, outfname)
 
 def download_month(year, month, area, output_fname):
     client = cdsapi.Client()
@@ -47,21 +39,17 @@ def download_month(year, month, area, output_fname):
     }
     client.retrieve("reanalysis-era5-land", request).download(output_fname)
 
-def merge_monthly_files(year, outfname):
-    files = [f"ERA5_{year}_{month:02d}.nc" for month in range(1, 13)]
-    datasets = [xr.open_dataset(f) for f in files]
-    combined = xr.concat(datasets, dim="time")
-    combined.to_netcdf(outfname)
-
-    # Clean up individual files
-    for ds, fname in zip(datasets, files):
-        ds.close()
-        os.remove(fname)
-
 
 if __name__ == "__main__":
 
-    ofname = "/Users/xj21307/Desktop/era5_met_data.nc"
-    year = 2016
+    odir = "/Users/xj21307/Desktop/ERA5_data"
+    if not os.path.exists(odir):
+        os.makedirs(odir)
+
     area = [51.2, -0.9, 51.2, -0.9]
-    main(year, area, ofname)
+
+    year = 2016
+    for month in range(1, 13):
+        print(year, month)
+        monthly_fname = os.path.join(odir, f"ERA5_{year}_{month:02d}.nc")
+        download_month(year, month, area, monthly_fname)
