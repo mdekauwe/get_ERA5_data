@@ -46,7 +46,9 @@ def main(in_fname, out_fname):
     dew = ds['d2m'][:, 0, 0].values
     sp = ds['sp'][:, 0, 0].values
     rh = relative_humidity(ds['t2m'][:, 0, 0].values, dew)
-    ppt = ds['tp'][:, 0, 0].values * 1000.0  # m to mm
+    tp_vals = ds['tp'][:, 0, 0].values * 1000.0  # m to mm, cumulative values
+    ppt = np.diff(tp_vals, prepend=tp_vals[0])
+    ppt = np.clip(ppt, 0, None)  # no negative precipitation
     u10 = ds['u10'][:, 0, 0].values
     v10 = ds['v10'][:, 0, 0].values
     wind = np.sqrt(u10**2 + v10**2)
@@ -127,7 +129,7 @@ def relative_humidity(tair_k, dew_k):
 
 if __name__ == "__main__":
 
-    in_fname = "/Users/xj21307/Desktop/era5_met_data_may_2016.nc"
-    out_fname = "/Users/xj21307/Desktop/maestra_era5_met_data_may_2016.csv"
+    in_fname = "/Users/xj21307/Desktop/ERA5_data/ERA5_merged.nc"
+    out_fname = "/Users/xj21307/Desktop/ERA5_data/maestra_era5_met_data_merged.csv"
 
     main(in_fname, out_fname)

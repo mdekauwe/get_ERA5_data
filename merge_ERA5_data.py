@@ -18,12 +18,8 @@ import argparse
 def merge_monthly_files(nc_files, outfname, delete=False):
     sorted_files = sorted(nc_files, key=extract_year_month)
 
-    datasets = [xr.open_dataset(f) for f in sorted_files]
-    combined = xr.concat(datasets, dim="time")
+    combined = xr.open_mfdataset(sorted_files, combine='by_coords')
     combined.to_netcdf(outfname)
-
-    for ds, fname in zip(datasets, sorted_files):
-        ds.close()
 
     if delete:
         for fname in sorted_files:
@@ -44,6 +40,7 @@ if __name__ == "__main__":
                         help="Delete original files after merging")
     args = parser.parse_args()
 
-    nc_files = glob.glob("/Users/xj21307/Desktop/ERA5_data/*.nc")
-    outfname = os.path.join(odir, "ERA5_merged.nc")
+    fdir = "/Users/xj21307/Desktop/ERA5_data"
+    nc_files = glob.glob(os.path.join(fdir, "*.nc"))
+    outfname = os.path.join(fdir, "ERA5_merged.nc")
     merge_monthly_files(nc_files, outfname, delete=args.delete)
