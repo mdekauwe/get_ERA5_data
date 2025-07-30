@@ -29,9 +29,9 @@ svp <- function(T) {
 
 
 
+in_fname <- "/Users/xj21307/Desktop/ERA5_data/ERA5_merged.nc"
+out_fname <- "/Users/xj21307/Desktop/ERA5_data/maestra_era5_met_data_merged.csv"
 
-in_fname <- "/Users/xj21307/Desktop/era5_met_data_may_2016.nc"
-out_fname <- "/Users/xj21307/Desktop/maestra_era5_met_data_may_2016_fromR.csv"
 
 nc <- nc_open(in_fname)
 
