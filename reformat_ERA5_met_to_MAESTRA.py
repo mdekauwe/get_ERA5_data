@@ -67,7 +67,6 @@ def main(in_fname, out_fname):
         'RH%': rh,
         'PPT': ppt,
         'WIND': wind,
-        'RAD': rad,
         'PRESS': press,
         'PAR': par
     })
@@ -92,7 +91,7 @@ def main(in_fname, out_fname):
         f.write("nocolumns=8\n")
         f.write(f"startdate='{start_date_fmt}'\n")
         f.write(f"enddate='{end_date_fmt}'\n")
-        f.write("columns=\t'DOY'\t'TAIR'\t'RH%'\t'PPT'\t'WIND'\t'RAD'\t'PRESS'\n'PAR'\n")
+        f.write("columns=\t'DOY'\t'TAIR'\t'RH%'\t'PPT'\t'WIND'\t'PRESS'\t'PAR'\n")
         f.write("/\n\n")
         f.write("DATA STARTS\n")
         df.to_csv(f, index=False, sep="\t", header=False, float_format="%.6f")
