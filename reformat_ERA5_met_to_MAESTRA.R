@@ -82,6 +82,8 @@ end_date_fmt <- format(max(time), "%d/%m/%y")
 
 # Write header
 sink(out_fname)
+cat("ERA5 Met file\n")
+cat("\n")
 cat("&environ\n")
 cat("difsky = 0.0\n")
 cat("ca = 420\n")

@@ -72,6 +72,8 @@ def main(in_fname, out_fname):
     })
 
     with open(out_fname, "w") as f:
+        f.write("ERA5 Met File\n")
+        f.write("\n")
         f.write("&environ\n")
         f.write("difsky = 0.0\n")
         f.write("ca = 420\n")
