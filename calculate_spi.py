@@ -61,7 +61,7 @@ if __name__ == "__main__":
     plt.axhline(0, color='k', linestyle='--', linewidth=0.8)
 
     plt.xlabel('Year')
-    plt.ylabel('Standardized precipitation index (-)')
+    plt.ylabel('Standardised precipitation index (-)')
     plt.legend(loc="upper left")
     plt.tight_layout()
     plt.savefig(output_plot, dpi=300)
