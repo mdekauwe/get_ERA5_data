@@ -60,8 +60,8 @@ if __name__ == "__main__":
     plt.plot(df_spi.index, df_spi['spi_6'], label='SPI-6', color="#D55E00")
     plt.axhline(0, color='k', linestyle='--', linewidth=0.8)
 
-    plt.xlabel('year')
-    plt.ylabel('standardized precipitation index (-)')
+    plt.xlabel('Year')
+    plt.ylabel('Standardized precipitation index (-)')
     plt.legend(loc="upper left")
     plt.tight_layout()
     plt.savefig(output_plot, dpi=300)

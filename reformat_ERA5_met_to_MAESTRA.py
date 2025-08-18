@@ -32,7 +32,7 @@ def main(in_fname, out_fname):
     # fix for era5 format
     raw_lon = float(ds.longitude.mean().values)
     center_lon = normalise_longitude(raw_lon)
-
+    
     lat_deg, lat_min, lat_sec = decimal_to_dms(center_lat)
     lon_deg, lon_min, lon_sec = decimal_to_dms(center_lon)
     lat_hem = get_hemisphere(center_lat, 'lat')
